@@ -1,0 +1,39 @@
+{% extends 'flashTrolley/base.html' %}
+
+{% block title %} Login | Flash-Trolley {% endblock %}
+{% block login %}
+  <br/>
+  <br/>
+  <div class="container">
+         <div class="register">
+			   <div class="col-md-6 login-left">
+			  	 <h3>REGISTERED CUSTOMERS</h3>
+				 <p>Login and you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+				 <a class="acount-btn" href='/signin/'>Login</a>
+			   </div>
+			   <div class="col-md-6 login-right">
+			  	<h3>NEW CUSTOMERS</h3>
+				<p>Please signup here.</p>
+
+                  <form method="POST" action="">
+                        {% csrf_token %}
+                        {% for field in register_form %}
+                            {% if field.errors %}
+                                <ol class="errorlist">
+                                    {% for error in field.errors %}
+                                        <li><strong>*{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                </ol>
+                            {% endif %}
+                            {{ field.label_tag }}
+                            {{ field }}<br><br>
+                        {% endfor %}
+                        <button type='submit'> Submit </button>
+                    </form>
+
+			   </div>
+			   <div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

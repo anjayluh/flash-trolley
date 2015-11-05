@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block pagetitle %} Login {% endblock %}
+{% block subtitle %} <i class="fa fa-user"></i> Login {% endblock %}
+
+{% block login %}
+                <div class="row">
+<div class="col-lg-6">
+                        <h1>Login page</h1>
+
+                        <p> Welcome plse register with us </p>
+                    </div>
+                    <div class="col-lg-6">
+                        
+                        <h1>Login</h1>
+
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <ol class="errorlist">
+                                        {% for error in field.errors %}
+                                            <li><strong>*{{ error|escape }}</strong></li>
+                                        {% endfor %}
+                                    </ol>
+                                {% endif %}
+                                <table border="0">
+                                    <tr><th>{{ field.label_tag }}</th></tr>
+                                    <tr><td> {{ field }}</td></tr>
+                                </table>
+                                <br/>
+                                {% endfor %}
+                                <br/>
+                            <button type='submit' class="acount-btn"> Login </button>
+                        </form>
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
+{% endblock %}

@@ -1,0 +1,13 @@
+    {% load staticfiles %}
+    <p>Welcome {{ customer.username }} !!</p>
+
+    <a href="/signin/">Login</a>
+    <br/>
+    <a href="{%  url 'flashTrolley:register' %}">Signup</a>
+    {% for product in products %}
+        <h2>{{ product }}</h2>
+        {{ product.product_description }}<br>
+        {{ product.expiry_date }}<br>
+        <img src = "{{ product.product_image.url  }}" alt=""/>
+
+    {% endfor %}

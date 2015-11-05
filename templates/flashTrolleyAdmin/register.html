@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block pagetitle %} Register {% endblock %}
+{% block subtitle %} <i class="fa fa-fw fa-table"></i> Register {% endblock %}
+
+{% block register %}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1>Registration Page</h1>
+
+                        <p> Welcome plse login </p>
+                    </div>
+                    <div class="col-lg-6">
+                        
+                        <h1>Register with us</h1>
+
+                        <form method="POST" action="">
+                        {% csrf_token %}
+                        {% for field in register_form %}
+                            {% if field.errors %}
+                                <ol class="errorlist">
+                                    {% for error in field.errors %}
+                                        <li><strong>*{{ error|escape }}</strong></li>
+                                    {% endfor %}
+                                </ol>
+                            {% endif %}
+                            <table border="0">
+                                <tr><th>{{ field.label_tag }}</th></tr>
+                                <tr><td> {{ field }}</td></tr>
+                            </table>
+                            <br/>
+                            {% endfor %}
+                        <br/>
+                        <button type='submit'> Submit </button>
+                    </form>
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
+{% endblock %}

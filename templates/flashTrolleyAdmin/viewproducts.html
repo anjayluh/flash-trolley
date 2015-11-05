@@ -1,0 +1,77 @@
+
+{% extends 'flashTrolleyAdmin/base.html' %}
+{% load staticfiles %}
+
+{% block pagetitle %}View all products{% endblock %}
+{% block subtitle %} <i class="fa fa-fw fa-table"></i>View products{% endblock %}
+{% block products %}
+    <div class="row">
+    <div class="box col-md-12">
+    <div class="box-content">
+         {% if messages %}
+           {% for message in messages %}
+               <p style="color: darkgreen">{{ message }}</p>
+           {% endfor %}
+         {% endif %}
+
+    <div class="alert alert-info"><a href="/addproduct/">Add new products </a></div>
+    <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+    <thead>
+    <tr>
+        <th>Product name</th>
+        <th>Product image</th>
+        <th>Product description</th>
+        <th>Product price</th>
+        <th>Expiry date</th>
+        <th>modify product</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td class="center">
+            <span><a href = '/productdetails/'>{{ product.product_name }}</a></span>
+        </td>
+        <td class="center">
+            <span><a href = '{{ product.product_image.url }}'>{{ product.product_image.url }}</a></span>
+        </td>
+        <td class="center">
+            <span >{{ product.product_description }}</span>
+        </td>
+        <td class="center">
+            <span >{{ product.product_price }}</span>
+        </td>
+        <td class="center">
+            <span >{{ product.expiry_date }}</span>
+        </td>
+        <td class="center">
+            <a class="btn btn-info" href="/editproduct/">
+                <i class="glyphicon glyphicon-edit icon-white"></i>
+                Edit
+            </a>
+            <a class="btn btn-danger" href="/deleteproduct/">
+                <i class="glyphicon glyphicon-trash icon-white"></i>
+                Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+       <ul class="pagination pagination-centered">
+            <li><a href="#">Prev</a></li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+       </ul>
+
+    </div>
+    </div>
+    </div>
+    <!--/span-->
+
+{% endblock %}

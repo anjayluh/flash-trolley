@@ -1,0 +1,181 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{% static "css/bootstrap.css" %}" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<link href="{% static "css/style.css" %}" rel='stylesheet' type='text/css' />
+
+<!-- icon -->
+<link rel="shortcut icon" href="{% static "ico/favicon.ico.png" %}">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "ico/apple-touch-icon-144-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static "ico/apple-touch-icon-114-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "ico/apple-touch-icon-72-precomposed.png" %}">
+<link rel="apple-touch-icon-precomposed" href="{% static "ico/apple-touch-icon-57-precomposed.png" %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/error_css.css' %}" />
+
+<!--webfont-->
+<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script src="{% static "js/responsiveslides.min.js" %}"></script>
+<script>
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: true,
+      	nav: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+</script>
+<script type="text/javascript" src="{% static "js/hover_pack.js" %}"></script>
+</head>
+<body>
+<div class="header">
+	<div class="header_top">
+		<div class="container">
+			<div class="logo">
+				<a href="/home/"><img src="{% static "images/word.png" %}" alt=""/></a>
+			</div>
+			<ul class="shopping_grid">
+                  {% if request.session.username != null %}
+                        <li>Welcome, {{ request.session.username }}<br/><small><a href="/logout/?next=/">logout</a></small></li>
+                  {% elif user and not user.is_anonymous %}
+                     <li>Welcome {{ user.get_full_name|default:user.username }}<br/><small><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></small></li>
+                  {% else %}
+                       <li>Welcome, Guest
+                   {% endif %}
+
+			      <a href="/register/"><li style="color: #080808">Register</li></a>
+			      <a href="/signin/"><li>Login</li></a>
+                   <a href="/myaccount/"><li>My account</li></a>
+			      <a href="#"><li><span class="m_1">Shopping Bag</span>&nbsp;&nbsp;(0) &nbsp;<img src="{% static "images/bag.png" %}" alt=""/></li></a>
+			      <div class="clearfix"> </div>
+			</ul>
+		    <div class="clearfix"> </div>
+		</div>
+	</div>
+	<div class="h_menu4"><!-- start h_menu4 -->
+		<div class="container">
+				<a class="toggleMenu" href="#">Menu</a>
+				<ul class="nav">
+					<li class="active"><a href="/home/" data-hover="Home">Home</a></li>
+					<li><a href="/about/" data-hover="About Us">About Us</a></li>
+					<li><a href="/contact/" data-hover="Contact Us">Contact Us</a></li>
+					<li><a href="/wishlist/" data-hover="Wish List">Wish List</a></li>
+				 </ul>
+				 <script type="text/javascript" src="{% static "js/nav.js" %}"></script>
+	      </div><!-- end h_menu4 -->
+     </div>
+</div>
+<!-- slider -->
+{% block slider %}{% endblock %}
+
+<!-- search product -->
+<div class="column_center">
+  <div class="container">
+	<div class="search">
+	  <div class="stay">Search Product</div>
+	  <div class="stay_right">
+		  <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+		  <input type="submit" value="">
+	  </div>
+	  <div class="clearfix"> </div>
+	</div>
+    <div class="clearfix"> </div>
+  </div>
+</div>
+<!-- end search product -->
+{% block single %}{% endblock %}
+{% block wishlist %}{% endblock %}
+{% block about %}{% endblock %}
+{% block contacts  %}{% endblock %}
+{% block menu %}{% endblock %}
+{% block login %}{% endblock %}
+{% block signup %}{% endblock %}
+{% block main %}{% endblock %}
+<!-- products menu -->
+				<!--initiate accordion-->
+		<script type="text/javascript">
+			$(function() {
+			    var menu_ul = $('.menu > li > ul'),
+			           menu_a  = $('.menu > li > a');
+			    menu_ul.hide();
+			    menu_a.click(function(e) {
+			        e.preventDefault();
+			        if(!$(this).hasClass('active')) {
+			            menu_a.removeClass('active');
+			            menu_ul.filter(':visible').slideUp('normal');
+			            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+			        } else {
+			            $(this).removeClass('active');
+			            $(this).next().stop(true,true).slideUp('normal');
+			        }
+			    });
+			
+			});
+		</script>
+       <!-- side bar -->
+       <!-- products -->
+
+<br/>
+<br/>
+
+<div class="footer_bg">
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="col-md-3 f_grid1">
+			<h3>About</h3>
+			<a href="#"><img src="{% static "images/logo.jpg" %}" alt=""/></a>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+		</div>
+		<div class="col-md-3 f_grid1 f_grid2">
+			<h3>Follow Us</h3>
+			<ul class="social">
+				<li><a href="https://www.facebook.com/flashTrolley"> <i class="fb"> </i><p class="m_3">Facebook</p><div class="clearfix"> </div></a></li>
+			    <li><a href="https://twitter.com/FlashTrolley"><i class="tw"> </i><p class="m_3">Twittter</p><div class="clearfix"> </div></a></li>
+
+			</ul>
+		</div>
+		<div class="col-md-6 f_grid3">
+			<h3>Contact Info</h3>
+			<ul class="list">
+				<li><p>Phone : 1.800.254.5487</p></li>
+				<li><p>Fax : 1.800.254.2548</p></li>
+				<li><p>Email : <a href="mailto:info(at)flashtrolley.com"> info(at)flash-Trolley.com</a></p></li>
+			</ul>
+			<ul class="list1">
+				<li><p>Aliquam augue a bibendum ipsum diam, semper porttitor libero elit egestas gravida, ut quam, nunc taciti</p></li>
+			</ul>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="footer_bottom">
+       	<div class="container">
+       		<div class="cssmenu">
+				<ul>
+					<li class="active"><a href="#">Privacy Policy</a></li> .
+					<li><a href="#">Terms of Service</a></li> .
+					<li><a href="#">Creative Rights Policy</a></li> .
+					<li><a href="#">Contact Us</a></li> .
+					<li><a href="register.html">Support & FAQ</a></li>
+				</ul>
+			</div>
+			<div class="copy">
+			    <p>&copy;  2015 Flash-Trolley copyright</p>
+		    </div>
+		    <div class="clearfix"> </div>
+       	</div>
+</div>
+</body>
+</html>		

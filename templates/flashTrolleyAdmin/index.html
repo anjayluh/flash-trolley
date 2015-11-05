@@ -1,0 +1,8 @@
+{% extends 'flashTrolleyAdmin/base.html' %}
+{% if messages %}
+   {% for message in messages %}
+       <p>{{ message }}</p>
+   {% endfor %}
+{% else %}
+    <p>If you have an account with us, please log in.</p>
+{% endif %}
