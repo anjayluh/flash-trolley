@@ -50,7 +50,8 @@
                         <li>Welcome, {{ request.session.username }}</li>
                         <a href="/logout/?next=/"><li>Logout</li></a>
                   {% elif user and not user.is_anonymous %}
-                     <li>Welcome {{ user.get_full_name|default:user.username }}<br/><small><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></small></li>
+                     <li>Welcome,  {{ user.get_full_name|default:user.username }}</li>
+                     <a href="{% url 'auth:logout' %}?next={{ request.path }}"><li>Logout</li></a>
                   {% else %}
                        <li>Welcome, Guest</li>
                       <a href="/signin/"><li>Login</li></a>
