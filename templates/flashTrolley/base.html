@@ -47,16 +47,17 @@
 			</div>
 			<ul class="shopping_grid">
                   {% if request.session.username != null %}
-                        <li>Welcome, {{ request.session.username }}<br/><small><a href="/logout/?next=/">logout</a></small></li>
+                        <li>Welcome, {{ request.session.username }}</li>
+                        <a href="/logout/?next=/"><li>Logout</li></a>
                   {% elif user and not user.is_anonymous %}
                      <li>Welcome {{ user.get_full_name|default:user.username }}<br/><small><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></small></li>
                   {% else %}
-                       <li>Welcome, Guest
+                       <li>Welcome, Guest</li>
+                      <a href="/signin/"><li>Login</li></a>
                    {% endif %}
 
 			      <a href="/register/"><li style="color: #080808">Register</li></a>
-			      <a href="/signin/"><li>Login</li></a>
-                   <a href="/myaccount/"><li>My account</li></a>
+                  <a href="/myaccount/"><li>My account</li></a>
 			      <a href="#"><li><span class="m_1">Shopping Bag</span>&nbsp;&nbsp;(0) &nbsp;<img src="{% static "images/bag.png" %}" alt=""/></li></a>
 			      <div class="clearfix"> </div>
 			</ul>
